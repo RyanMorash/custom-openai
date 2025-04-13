@@ -40,7 +40,7 @@ Configuration options:
 
 ## Usage
 
-Once configured, you can use this integration exactly like the built-in OpenAI Conversation integration. The conversation agent will appear in your list of available assistants.
+Once configured, you can use this integration exactly like the built-in OpenAI Conversation integration. The conversation agent will appear in your list of available assistants. For more info, see the [Home Assistant documentation](https://www.home-assistant.io/integrations/openai_conversation/)
 
 ## License
 
