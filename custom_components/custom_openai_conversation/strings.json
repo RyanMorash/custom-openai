@@ -3,8 +3,8 @@
     "step": {
       "user": {
         "data": {
-          "api_key": "[%key:common::config_flow::data::api_key%]",
-          "base_url": "Base URL for the OpenAI API"
+          "base_url": "[%key:common::config_flow::data::base_url%]",
+          "api_key": "[%key:common::config_flow::data::api_key%]"
         }
       }
     },
