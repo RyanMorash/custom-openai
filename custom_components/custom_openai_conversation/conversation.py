@@ -333,6 +333,7 @@ class OpenAIConversationEntity(
                 LOGGER.error("Rate limited by OpenAI: %s", err)
                 raise HomeAssistantError("Rate limited or insufficient funds") from err
             except openai.OpenAIError as err:
+                LOGGER.debug(err.with_traceback)
                 LOGGER.error("Error talking to OpenAI: %s", err)
                 raise HomeAssistantError("Error talking to OpenAI") from err
 
