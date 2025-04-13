@@ -6,9 +6,9 @@
   "config_flow": true,
   "dependencies": ["conversation"],
   "documentation": "https://github.com/RyanMorash/custom-openai/blob/main/readme.md",
-  "issue_tracker": "https://github.com/RyanMorash/custom-openai/issues",
   "integration_type": "service",
   "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/RyanMorash/custom-openai/issues",
   "requirements": ["openai==1.68.2"],
   "version": "0.1.0"
 }
