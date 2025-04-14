@@ -87,9 +87,10 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> None:
 
     Data has the keys from STEP_USER_DATA_SCHEMA with values provided by the user.
     """
-    client = openai.AsyncOpenAI(
+    client = openai.AsyncAzureOpenAI(
         base_url=data[CONF_BASE_URL], 
         api_key=data[CONF_API_KEY],
+        api_version="2025-03-01-preview",
         http_client=get_async_client(hass)
     )
     await hass.async_add_executor_job(client.with_options(timeout=10.0).models.list)
@@ -195,9 +196,10 @@ class AzureOpenAIOptionsFlow(OptionsFlow):
         location_data: dict[str, str] = {}
         zone_home = self.hass.states.get(ENTITY_ID_HOME)
         if zone_home is not None:
-            client = openai.AsyncOpenAI(
+            client = openai.AsyncAzureOpenAI(
                 base_url=self.config_entry.data[CONF_BASE_URL],
                 api_key=self.config_entry.data[CONF_API_KEY],
+                api_version="2025-03-01-preview",
                 http_client=get_async_client(self.hass),
             )
             location_schema = vol.Schema(

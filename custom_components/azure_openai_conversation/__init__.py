@@ -60,13 +60,13 @@ SERVICE_GENERATE_CONTENT = "generate_content"
 PLATFORMS = (Platform.CONVERSATION,)
 CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
 
-type OpenAIConfigEntry = ConfigEntry[openai.AsyncClient]
+type OpenAIConfigEntry = ConfigEntry[openai.AsyncAzureOpenAI]
 
 
 def encode_file(file_path: str) -> tuple[str, str]:
     """Return base64 version of file contents."""
     mime_type, _ = guess_file_type(file_path)
-    if mime_type is None:
+    if (mime_type is None):
         mime_type = "application/octet-stream"
     with open(file_path, "rb") as image_file:
         return (mime_type, base64.b64encode(image_file.read()).decode("utf-8"))
@@ -87,7 +87,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
                 translation_placeholders={"config_entry": entry_id},
             )
 
-        client: openai.AsyncClient = entry.runtime_data
+        client: openai.AsyncAzureOpenAI = entry.runtime_data
 
         try:
             response: ImagesResponse = await client.images.generate(
@@ -117,7 +117,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
             )
 
         model: str = entry.options.get(CONF_CHAT_MODEL, RECOMMENDED_CHAT_MODEL)
-        client: openai.AsyncClient = entry.runtime_data
+        client: openai.AsyncAzureOpenAI = entry.runtime_data
 
         content: ResponseInputMessageContentListParam = [
             ResponseInputTextParam(type="input_text", text=call.data[CONF_PROMPT])
@@ -242,9 +242,10 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
 async def async_setup_entry(hass: HomeAssistant, entry: OpenAIConfigEntry) -> bool:
     """Set up Azure OpenAI Conversation from a config entry."""
-    client = openai.AsyncOpenAI(
+    client = openai.AsyncAzureOpenAI(
         base_url=entry.data[CONF_BASE_URL],
         api_key=entry.data[CONF_API_KEY],
+        api_version="2025-03-01-preview",
         http_client=get_async_client(hass),
     )
 
