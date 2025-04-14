@@ -1,4 +1,4 @@
-"""The OpenAI Conversation integration."""
+"""The Azure OpenAI Conversation integration."""
 
 from __future__ import annotations
 
@@ -73,7 +73,7 @@ def encode_file(file_path: str) -> tuple[str, str]:
 
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
-    """Set up OpenAI Conversation."""
+    """Set up Azure OpenAI Conversation."""
 
     async def render_image(call: ServiceCall) -> ServiceResponse:
         """Render an image with dall-e."""
@@ -241,7 +241,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: OpenAIConfigEntry) -> bool:
-    """Set up OpenAI Conversation from a config entry."""
+    """Set up Azure OpenAI Conversation from a config entry."""
     client = openai.AsyncOpenAI(
         base_url=entry.data[CONF_BASE_URL],
         api_key=entry.data[CONF_API_KEY],
@@ -267,5 +267,5 @@ async def async_setup_entry(hass: HomeAssistant, entry: OpenAIConfigEntry) -> bo
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Unload OpenAI."""
+    """Unload Azure OpenAI."""
     return await hass.config_entries.async_unload_platforms(entry, PLATFORMS)

@@ -1,8 +1,8 @@
-"""Constants for the OpenAI Conversation integration."""
+"""Constants for the Azure OpenAI Conversation integration."""
 
 import logging
 
-DOMAIN = "custom_openai_conversation"
+DOMAIN = "azure_openai_conversation"
 LOGGER: logging.Logger = logging.getLogger(__package__)
 
 CONF_BASE_URL = "base_url"

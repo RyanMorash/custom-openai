@@ -1,4 +1,4 @@
-"""Config flow for OpenAI Conversation integration."""
+"""Config flow for Azure OpenAI Conversation integration."""
 
 from __future__ import annotations
 
@@ -95,8 +95,8 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> None:
     await hass.async_add_executor_job(client.with_options(timeout=10.0).models.list)
 
 
-class OpenAIConfigFlow(ConfigFlow, domain=DOMAIN):
-    """Handle a config flow for OpenAI Conversation."""
+class AzureOpenAIConfigFlow(ConfigFlow, domain=DOMAIN):
+    """Handle a config flow for Azure OpenAI Conversation."""
 
     VERSION = 1
 
@@ -136,11 +136,11 @@ class OpenAIConfigFlow(ConfigFlow, domain=DOMAIN):
         config_entry: ConfigEntry,
     ) -> OptionsFlow:
         """Create the options flow."""
-        return OpenAIOptionsFlow(config_entry)
+        return AzureOpenAIOptionsFlow(config_entry)
 
 
-class OpenAIOptionsFlow(OptionsFlow):
-    """OpenAI config flow options handler."""
+class AzureOpenAIOptionsFlow(OptionsFlow):
+    """Azure OpenAI config flow options handler."""
 
     def __init__(self, config_entry: ConfigEntry) -> None:
         """Initialize options flow."""
