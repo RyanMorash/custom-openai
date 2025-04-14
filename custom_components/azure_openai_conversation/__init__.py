@@ -243,7 +243,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 async def async_setup_entry(hass: HomeAssistant, entry: OpenAIConfigEntry) -> bool:
     """Set up Azure OpenAI Conversation from a config entry."""
     client = openai.AsyncAzureOpenAI(
-        base_url=entry.data[CONF_BASE_URL],
+        azure_endpoint=entry.data[CONF_BASE_URL],
         api_key=entry.data[CONF_API_KEY],
         api_version="2025-03-01-preview",
         http_client=get_async_client(hass),
